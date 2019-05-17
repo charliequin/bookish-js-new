@@ -1,31 +1,4 @@
 const databaseService = require('./database-service');
-const readLineSync = require('readline-sync');
-
-function getUserInput() {
-
-    let success = false;
-    let x = 1;
-    let y = 2;
-
-    while (!success) {
-        let bookName = readLineSync.question('\nBook name: ');
-        let bookPublishDate = readLineSync.question('Publish date (YYYY/MM/DD): ');
-        let bookLanguage = readLineSync.question('Language: ');
-        let bookCopyNum = readLineSync.question('Number of copies: ');
-
-        
-        addBook(bookName, bookPublishDate, bookLanguage, bookCopyNum, () => {});
-        return;
-        
-    }
-};
-
-while (true) {
-    getUserInput();
-}
-
-
-
 
 module.exports = {
     getAllBooks: getAllBooks,
@@ -36,8 +9,6 @@ module.exports = {
     addBookCopy: addBookCopy,
     obtainLastID: obtainLastID
 };
-
-// addBook('The Grapes of Wrath', '1939-03-01', 'English', 3, () => {});
 
 function getBookByAuthor(NAME, callback) {
     const connection = databaseService.getConnection();
