@@ -28,7 +28,7 @@
             </div>
 
             <h2>Add a technology:</h2>
-            <form action="/about/add-technology" method="post">
+            <form action="/books/add-book" method="post">
                 <div class="add-tech-row">
                     <label>
                         <span>Name: </span>
@@ -37,13 +37,25 @@
                 </div>
                 <div class="add-tech-row">
                     <label>
-                        <span>Logo URL: </span>
-                        <input type="text" name="logoUrl">
+                        <span>Publish Date (YYYY/MM/DD): </span>
+                        <input type="text" name="publishDate">
+                    </label>
+                </div>
+                <div class="add-tech-row">
+                    <label>
+                        <span>Language: </span>
+                        <input type="text" name="language">
+                    </label>
+                </div>
+                <div class="add-tech-row">
+                    <label>
+                        <span>Copies: </span>
+                        <input type="text" name="copies">
                     </label>
                 </div>
                 <div class="add-tech-row">
                     <span><!-- spacer --></span>
-                    <input type="submit" value="Add technology" />
+                    <input type="submit" value="Add book" />
                 </div>
             </form>
         </div>

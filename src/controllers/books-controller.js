@@ -22,14 +22,16 @@ function setupThisController(app) {
     });
 
 
-    app.post('/about/add-technology', function(req, res) {
+    app.post('/books/add-book', function(req, res) {
 
-        let technologyName = req.body.name;
-        let technologyLogoUrl = req.body.logoUrl;
+        let bookName = req.body.name;
+        let bookPublishDate = req.body.publishDate;
+        let bookLanguage = req.body.language;
+        let bookCopies = req.body.copies;
 
-        technologyService.addTechnology(technologyName, technologyLogoUrl, function() {
+        bookService.addBook(bookName, bookPublishDate, bookLanguage, bookCopies, function() {
             // Redirect the user to the URL: /about
-            res.redirect('/about');
+            res.redirect('/books');
         })
        
     });
