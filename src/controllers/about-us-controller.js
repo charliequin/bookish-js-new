@@ -1,4 +1,4 @@
-const technologyService = require('../services/author-service');
+const technologyService = require('../services/technology-service');
 
 
 module.exports = {

@@ -1,28 +1,26 @@
-const path = require('path');
-const express = require('express');
-
+const EXPRESS = require('express');
+const HTTP = require('http');
+const PATH = require('path');
+const APP = EXPRESS();
 const indexController = require('./controllers/index-controller');
 const aboutUsController = require('./controllers/about-us-controller.js');
+const booksController = require('./controllers/books-controller.js');
 
 
-// SETUP EXPRESS
-const app = express();
-app.use(express.urlencoded());
+let server = HTTP.createServer(APP);
+let port = process.env.PORT | 8080;
+APP.listen(port);
 
-// Use EJS as the templating engine
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, '/views'));
+APP.set('views', __dirname + '/views');
+APP.engine('html', require('ejs').__express);
+APP.set('view engine', 'html');
 
-// Serve static files from the 'static' folder
-app.use(express.static('src/static'));
+APP.use(EXPRESS.static(PATH.join(__dirname, '/static')));
+APP.use(EXPRESS.urlencoded());
 
-const port = 3000;
-
-
-
-indexController.register(app);
-aboutUsController.register(app);
+indexController.register(APP);
+aboutUsController.register(APP);
+booksController.register(APP);
 
 
-
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+console.log(`Server initialised on https://localhost:${port}`);
