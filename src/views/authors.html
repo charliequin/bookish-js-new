@@ -4,9 +4,8 @@
 
     <head>
         <title>Bookish - Books</title>
-
-        <link rel="stylesheet" href="/styles/general.css"/>
-        <link rel="stylesheet" href="/styles/navbar.css"/>
+       
+        <link rel="stylesheet" href="/styles/bootstrap.css"/>
         <link rel="stylesheet" href="/styles/about.css"/>
     </head>
 
@@ -14,54 +13,25 @@
 
         <% include fragments/navbar.html %>
 
-        <div class="container">
-            <h2>This app was made using:</h2>
+        <div class="container" style="padding-top: 5em;">
+            <h2>Authors we have:</h2>
+            <br>
 
             <div class="technology-list">
                 <% author.forEach(function(author) { %>
+                    <% let dobDate = new Date(author.DOB) %>
+                    <% let dodDate = new Date(author.DOD) %>
                     <div class="technology">
-                        <h3><%=author.NAME%></h3>
-                        <p><span><strong>Born: </strong></span><%=author.DOB%></p>
-                        <p><span><strong>Died: </strong><%=author.DOD%></p>
-                        <h4><%=author.NATIONALITY%></h4>
+                        <h4><%=author.NAME%></h4>
+                        <p><strong>Born: </strong><%=new Intl.DateTimeFormat().format(dobDate);%></p>
+                        <p><strong>Died: </strong><%=new Intl.DateTimeFormat().format(dodDate);%></p>
+                        <h5><%=author.NATIONALITY%></h5>
                         <div class="delete-book">
                             <a href="/authors/remove-author?authorID=<%=author.ID%>" class="delete-button">Delete</a>
                         </div>
                     </div>
                 <% }); %>
             </div>
-
-            <h2>Add an Author:</h2>
-            <form action="/authors/add-author" method="post">
-                <div class="add-tech-row">
-                    <label>
-                        <span>Name: </span>
-                        <input type="text" name="name">
-                    </label>
-                </div>
-                <div class="add-tech-row">
-                    <label>
-                        <span>DOB (YYYY/MM/DD): </span> <br>
-                        <input type="text" name="DOB">
-                    </label>
-                </div>
-                <div class="add-tech-row">
-                    <label>
-                        <span>DOD: </span>
-                        <input type="text" name="DOD">
-                    </label>
-                </div>
-                <div class="add-tech-row">
-                    <label>
-                        <span>Nationality: </span>
-                        <input type="text" name="nationality">
-                    </label>
-                </div>
-                <div class="add-tech-row">
-                    <span><!-- spacer --></span>
-                    <input type="submit" value="Add Author" />
-                </div>
-            </form>
         </div>
 
     </body>

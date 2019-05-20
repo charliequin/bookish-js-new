@@ -1,4 +1,4 @@
-const bookService = require('../services/book-service');
+const bookService = require('../services/book-service.js');
 
 
 module.exports = {
@@ -29,7 +29,6 @@ function setupThisController(app) {
         let bookCopies = req.body.copies;
 
         bookService.addBook(bookName, bookPublishDate, bookLanguage, bookCopies, function() {
-            // Redirect the user to the URL: /books
             res.redirect('/books');
         })
     });

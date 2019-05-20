@@ -2,10 +2,12 @@ const EXPRESS = require('express');
 const HTTP = require('http');
 const PATH = require('path');
 const APP = EXPRESS();
+
 const indexController = require('./controllers/index-controller.js');
 const aboutUsController = require('./controllers/about-us-controller.js');
 const booksController = require('./controllers/books-controller.js');
 const authorController = require('./controllers/authors-controller.js');
+const controlController = require('./controllers/control-controller.js');
 
 
 let server = HTTP.createServer(APP);
@@ -23,5 +25,6 @@ indexController.register(APP);
 aboutUsController.register(APP);
 booksController.register(APP);
 authorController.register(APP);
+controlController.register(APP);
 
 console.log(`Server initialised on https://localhost:${port}`);

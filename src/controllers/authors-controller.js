@@ -22,21 +22,6 @@ function setupThisController(app) {
     });
 
 
-    app.post('/authors/add-author', function(req, res) {
-
-        let authorName = req.body.name;
-        let authorDOB = req.body.DOB;
-        let authorDOD = req.body.DOD;
-        let authorNationality = req.body.nationality;
-
-        authorService.addAuthor(authorName, authorDOB, authorDOD, authorNationality, function() {
-            // Redirect the user to the URL: /books
-            // bookService.addAuthor()
-            res.redirect('/authors');
-        })
-    });
-
-
     app.get('/authors/remove-author', function(req, res) {
         
         let authorIDToDelete = req.query.authorID;

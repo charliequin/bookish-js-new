@@ -5,8 +5,7 @@
     <head>
         <title>Bookish - Books</title>
 
-        <link rel="stylesheet" href="/styles/general.css"/>
-        <link rel="stylesheet" href="/styles/navbar.css"/>
+        <link rel="stylesheet" href="/styles/bootstrap.css"/>
         <link rel="stylesheet" href="/styles/about.css"/>
     </head>
 
@@ -14,53 +13,23 @@
 
         <% include fragments/navbar.html %>
 
-        <div class="container">
-            <h2>This app was made using:</h2>
+        <div class="container" style="padding-top: 5em;">
+            <h2>Books we have: </h2>
+            <br>
 
             <div class="technology-list">
                 <% books.forEach(function(book) { %>
+                    <%  let formatBook = new Date(book.PUBLISH_DATE) %>
                     <div class="technology">
-                        <h3><%=book.NAME%></h3>
-                        <p><%=book.PUBLISH_DATE%></p>
-                        <h4><%=book.LANGUAGE%></h4>
+                        <h4><%=book.NAME%></h4>
+                        <p><strong>Published on: </strong><span><%=new Intl.DateTimeFormat().format(formatBook);%></span></p>
+                        <h5><%=book.LANGUAGE%></h5>
                         <div class="delete-book">
                             <a href="/books/remove-book?bookID=<%=book.ID%>" class="delete-button">Delete</a>
                         </div>
                     </div>
                 <% }); %>
             </div>
-
-            <h2>Add a book:</h2>
-            <form action="/books/add-book" method="post">
-                <div class="add-tech-row">
-                    <label>
-                        <span>Name: </span>
-                        <input type="text" name="name">
-                    </label>
-                </div>
-                <div class="add-tech-row">
-                    <label>
-                        <span>Publish Date (YYYY/MM/DD): </span>
-                        <input type="text" name="publishDate">
-                    </label>
-                </div>
-                <div class="add-tech-row">
-                    <label>
-                        <span>Language: </span>
-                        <input type="text" name="language">
-                    </label>
-                </div>
-                <div class="add-tech-row">
-                    <label>
-                        <span>Copies: </span>
-                        <input type="text" name="copies">
-                    </label>
-                </div>
-                <div class="add-tech-row">
-                    <span><!-- spacer --></span>
-                    <input type="submit" value="Add book" />
-                </div>
-            </form>
         </div>
 
     </body>
