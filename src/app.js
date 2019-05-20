@@ -2,7 +2,7 @@ const EXPRESS = require('express');
 const HTTP = require('http');
 const PATH = require('path');
 const APP = EXPRESS();
-const indexController = require('./controllers/index-controller');
+const indexController = require('./controllers/index-controller.js');
 const aboutUsController = require('./controllers/about-us-controller.js');
 const booksController = require('./controllers/books-controller.js');
 

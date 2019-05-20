@@ -18,7 +18,6 @@ function setupThisController(app) {
 
             res.render('books', model);
         });
-
     });
 
 
@@ -30,23 +29,20 @@ function setupThisController(app) {
         let bookCopies = req.body.copies;
 
         bookService.addBook(bookName, bookPublishDate, bookLanguage, bookCopies, function() {
-            // Redirect the user to the URL: /about
+            // Redirect the user to the URL: /books
             res.redirect('/books');
         })
-       
     });
 
 
-    app.get('/about/delete-technology', function(req, res) {
+    app.get('/books/remove-book', function(req, res) {
         
-        let technologyIdToDelete = req.query.technologyId;
-
-        technologyService.deleteTechnology(technologyIdToDelete, function() {
-            // Redirect the user to the URL: /about
-            res.redirect('/about');
+        let bookIDToDelete = req.query.bookID;
+        res.redirect('/books');
+        bookService.deleteInventoryItem(bookIDToDelete, function() {
+            // Redirect the user to the URL: /books
+            
         });
-
     });
-
 
 }

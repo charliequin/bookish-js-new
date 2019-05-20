@@ -7,7 +7,8 @@ module.exports = {
     getBookByGenre: getBookByGenre,
     getBookByAuthor: getBookByAuthor,
     addBookCopy: addBookCopy,
-    obtainLastID: obtainLastID
+    obtainLastID: obtainLastID,
+    deleteInventoryItem: deleteInventoryItem
 };
 
 function getBookByAuthor(NAME, callback) {
@@ -80,28 +81,44 @@ function obtainLastID(callback) {
 }
 
 
-function addBookCopy(BookID, COPYNUM) {
+function addBookCopy(bookID, copyNum) {
     const connection = databaseService.getConnection();
 
     const query = 'INSERT INTO libraryOfWorms.Inventory (BookID) VALUES (?)';
-    const parameters = [BookID]
+    const parameters = [bookID]
 
-    for (let i = 0; i < COPYNUM; i++) {
+    for (let i = 0; i < copyNum; i++) {
         connection.query(query, parameters);
     }
-    console.log(`${COPYNUM} copies of ${BookID} added successfully.`);
+    console.log(`${copyNum} copies of ${bookID} added successfully.`);
     return;
 }
 
 
-function deleteBook(ID, callback) {
+function deleteBook(bookID, callback) {
     const connection = databaseService.getConnection();
 
     const query = 'DELETE FROM libraryOfWorms.Books WHERE id = ?';
-    const parameters = [ID];
+    const parameters = [bookID];
 
     connection.query(query, parameters, function (error, results, fields) {
         if (error) throw error;
         callback();
+        console.log(`${bookID} successfully deleted from libraryOfWorms.Books.`)
+    });
+}
+
+function deleteInventoryItem(bookID, callback) {
+    const connection = databaseService.getConnection();
+
+    const query = 'DELETE FROM libraryOfWorms.Inventory WHERE BookID  = ?'
+    const parameters = [bookID];
+
+    connection.query(query, parameters, function (error, results, fields) {
+        if (error) throw error;
+        callback(results);
+
+        deleteBook(bookID, callback);
+        console.log(`${bookID} successfully deleted from libraryOfWorms.Inventory.`)
     });
 }
