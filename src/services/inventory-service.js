@@ -20,11 +20,11 @@ function getAllInventory(callback) {
 }
 
 
-function addMember(NAME, DOB, SIGN_UP, DECEASED, callback) {
+function addMember(name, DOB, signUp, deceased, callback) {
     const connection = databaseService.getConnection();
 
     const query = 'INSERT INTO Members (NAME, DOB, SIGN_UP, DECEASED) VALUES (?, ?, ?, ?)';
-    const parameters = [NAME, DOB, SIGN_UP, DECEASED];
+    const parameters = [name, DOB, signUp, deceased];
 
     connection.query(query, parameters, function (error, results, fields) {
         if (error) throw error;

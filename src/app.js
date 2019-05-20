@@ -5,6 +5,7 @@ const APP = EXPRESS();
 const indexController = require('./controllers/index-controller.js');
 const aboutUsController = require('./controllers/about-us-controller.js');
 const booksController = require('./controllers/books-controller.js');
+const authorController = require('./controllers/authors-controller.js');
 
 
 let server = HTTP.createServer(APP);
@@ -21,6 +22,6 @@ APP.use(EXPRESS.urlencoded());
 indexController.register(APP);
 aboutUsController.register(APP);
 booksController.register(APP);
-
+authorController.register(APP);
 
 console.log(`Server initialised on https://localhost:${port}`);

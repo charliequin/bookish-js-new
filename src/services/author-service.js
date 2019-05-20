@@ -20,11 +20,11 @@ function getAllAuthors(callback) {
 }
 
 
-function addAuthor(NAME, DOB, DOD, NATIONALITY, callback) {
+function addAuthor(name, DOB, DOD, nationality, callback) {
     const connection = databaseService.getConnection();
 
     const query = 'INSERT INTO Authors (NAME, DOB, DOD, NATIONALITY) VALUES (?, ?, ?, ?)';
-    const parameters = [NAME, DOB, DOD, NATIONALITY];
+    const parameters = [name, DOB, DOD, nationality];
 
     connection.query(query, parameters, function (error, results, fields) {
         if (error) throw error;

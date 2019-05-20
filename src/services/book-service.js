@@ -11,14 +11,15 @@ module.exports = {
     deleteInventoryItem: deleteInventoryItem
 };
 
-function getBookByAuthor(NAME, callback) {
+
+function getBookByAuthor(name, callback) {
     const connection = databaseService.getConnection();
 
     const queryGenre = `SELECT * FROM Authors
                         JOIN AuthorBookMappingTable ON Authors.AuthorID = AuthorBookMappingTable.AuthorID
                         JOIN Books ON AuthorBookMappingTable.BookID = Books.ID
                         WHERE Author.Name = ?`;
-    const parameters = [NAME];
+    const parameters = [name];
 
     connection.query(queryGenre, parameters, function (error, results, fields) {
         if (error) throw error;
@@ -54,18 +55,18 @@ function getAllBooks(callback) {
 }
 
 
-function addBook(NAME, PUBLISH_DATE, LANGUAGE, COPYNUM, callback) {
+function addBook(name, publishDate, language, copyNum, callback) {
     const connection = databaseService.getConnection();
 
     const query = 'INSERT INTO libraryOfWorms.Books (NAME, PUBLISH_DATE, LANGUAGE) VALUES (?, ?, ?)';
-    const parameters = [NAME, PUBLISH_DATE, LANGUAGE];
+    const parameters = [name, publishDate, language];
 
     connection.query(query, parameters, function (error, results, fields) {
         if (error) throw error;
         callback(results);
-        console.log(`\n${NAME} added successfully!`);
+        console.log(`\n${name} added successfully!`);
 
-        obtainLastID(() => addBookCopy(results.insertId, COPYNUM))
+        obtainLastID(() => addBookCopy(results.insertId, copyNum))
     });
 };
 
