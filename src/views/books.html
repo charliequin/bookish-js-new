@@ -14,7 +14,8 @@
         <% include fragments/navbar.html %>
 
         <div class="container" style="padding-top: 5em;">
-            <h2>Books we have: </h2>
+            <h2>Books: </h2>
+            <hr>
             <br>
 
             <div class="technology-list">
@@ -22,7 +23,7 @@
                     <%  let formatBook = new Date(book.PUBLISH_DATE) %>
                     <div class="technology">
                         <h4><%=book.NAME%></h4>
-                        <p><strong>Published on: </strong><span><%=new Intl.DateTimeFormat().format(formatBook);%></span></p>
+                        <p><strong>Published on: </strong><%=new Intl.DateTimeFormat().format(formatBook);%></p>
                         <h5><%=book.LANGUAGE%></h5>
                         <div class="delete-book">
                             <a href="/books/remove-book?bookID=<%=book.ID%>" class="delete-button">Delete</a>

@@ -6,7 +6,7 @@ module.exports = {
     deleteBook: deleteBook,
     getBookByGenre: getBookByGenre,
     getBookByAuthor: getBookByAuthor,
-    addBookCopy: addBookCopy,
+    addBookCopies: addBookCopies,
     obtainLastID: obtainLastID,
     deleteInventoryItem: deleteInventoryItem
 };
@@ -66,7 +66,7 @@ function addBook(name, publishDate, language, copyNum, callback) {
         callback(results);
         console.log(`\n${name} added successfully!`);
 
-        obtainLastID(() => addBookCopy(results.insertId, copyNum))
+        obtainLastID(() => addBookCopies(results.insertId, copyNum))
     });
 };
 
@@ -82,7 +82,7 @@ function obtainLastID(callback) {
 }
 
 
-function addBookCopy(bookID, copyNum) {
+function addBookCopies(bookID, copyNum) {
     const connection = databaseService.getConnection();
 
     const query = 'INSERT INTO libraryOfWorms.Inventory (BookID) VALUES (?)';
